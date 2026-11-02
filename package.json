@@ -1,0 +1,16 @@
+{
+  "name": "quizbeta",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Un jeu multijoueur de quiz en temps réel",
+  "license": "MIT",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.8.1"
+  }
+}
