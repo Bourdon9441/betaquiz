@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172229">
+  <meta name="description" content="Crée un quiz, partage le code de la partie et joue en direct avec tes amis.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="quizbeta : Quiz en direct">
+  <meta property="og:description" content="Crée un quiz, partage le code de la partie et joue en direct avec tes amis.">
+  <meta property="og:image" content="/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="quizbeta accueil">
+        <span class="brand-mark">Q</span><span>quiz<span class="brand-light">beta</span></span>
+      </a>
+      <div class="topbar-actions">
+        <span class="top-note"><span class="live-dot"></span> Quiz en direct</span>
+        <button id="accessibility-toggle" class="settings-toggle" type="button" aria-expanded="false" aria-controls="accessibility-panel">Accessibilité</button>
+      </div>
+    </header>
+    <section id="accessibility-panel" class="accessibility-panel hidden" aria-label="Réglages d’accessibilité">
+      <strong>Réglages d’affichage</strong>
+      <label><input id="setting-large-text" type="checkbox"> Texte plus grand</label>
+      <label><input id="setting-high-contrast" type="checkbox"> Contraste renforcé</label>
+      <label><input id="setting-colorblind" type="checkbox"> Repères accessibles (daltonisme)</label>
+      <label><input id="setting-sound" type="checkbox"> Sons facultatifs</label>
+      <p id="accessibility-error" class="error-message" role="alert"></p>
+    </section>
+
+    <main>
+      <section id="home-screen" class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">QUIZ EN DIRECT</div>
+          <h1>Lance un quiz.<br><span>Fais jouer tout le monde.</span></h1>
+          <p>Crée une partie, partage son code et réponds aux questions ensemble.</p>
+        </div>
+        <div class="game-card">
+          <div class="card-heading">
+            <div>
+              <span class="card-kicker">PRÊT À JOUER ?</span>
+              <h2>Rejoins une partie</h2>
+            </div>
+            <div class="orbit" aria-hidden="true"><span>Q</span></div>
+          </div>
+          <div id="home-forms">
+            <form id="join-form" class="form-stack">
+              <label for="room-code">Code de partie</label>
+              <input id="room-code" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="Ex. 482913" required>
+              <label for="player-name">Ton pseudo</label>
+              <input id="player-name" name="name" maxlength="20" placeholder="Comment on t’appelle ?" required>
+              <button class="button button-primary" type="submit">Rejoindre la partie <span>→</span></button>
+            </form>
+            <div class="card-divider"><span>OU</span></div>
+            <form id="host-form" class="host-form">
+              <input id="host-name" maxlength="20" placeholder="Ton pseudo d’animateur" aria-label="Pseudo de l’animateur" required>
+              <button class="button button-secondary" type="submit"><span class="plus">＋</span> Créer un quiz</button>
+            </form>
+            <button id="open-library" class="library-link" type="button">Parcourir la bibliothèque</button>
+            <button id="play-solo" class="library-link" type="button">Jouer seul</button>
+          </div>
+          <section id="library-panel" class="library-panel hidden" aria-label="Bibliothèque de quiz"></section>
+          <section id="creator-panel" class="creator-panel hidden" aria-label="Création de quiz"></section>
+          <p id="home-error" class="error-message" role="alert"></p>
+        </div>
+      </section>
+
+      <section id="game-screen" class="game-screen hidden" aria-live="polite">
+        <div class="game-top">
+          <div class="room-pill"><span id="game-mode-label">PARTIE</span> <strong id="active-code"></strong></div>
+        </div>
+        <div id="game-content"></div>
+      </section>
+    </main>
+    <aside id="live-reactions" class="live-reactions" aria-live="polite" aria-label="Réactions en direct"></aside>
+    <aside id="scoreboard-overlay" class="scoreboard-overlay hidden" aria-live="polite" aria-label="Classement temporaire"></aside>
+    <footer>
+      <span>quizbeta</span>
+      <span>Des quiz à jouer ensemble ou en solo.</span>
+    </footer>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
